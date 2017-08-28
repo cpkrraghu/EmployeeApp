@@ -33,4 +33,23 @@ public class EmployeeDAOImpl extends AbstractDAO implements EmployeeDAO{
 		}
 		return list;
 	}
+
+	@Override
+	public Employee getEmployee(int empId) {
+		ResultSet rs=null;
+		Employee e=null;
+		try (Connection conn = ConnectionFactory.getConnection();
+				Statement st=conn.createStatement();
+				PreparedStatement ps = conn.prepareStatement("select empNo,deptNo,doj,dob,salary,salaryGrade from tbl_employee where empNo=?")){
+				ps.setInt(1, empId);
+				rs=ps.executeQuery();
+				while(rs.next()){
+					e=new Employee(rs.getInt(1),rs.getInt(2),rs.getDate(3),rs.getDate(4),rs.getFloat(5),rs.getInt(6));
+				}
+				
+		}catch (Exception ex) {
+			logger.error(ex.getMessage());
+		}
+		return e;
+	}
 }

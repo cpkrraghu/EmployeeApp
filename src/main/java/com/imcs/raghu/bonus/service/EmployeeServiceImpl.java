@@ -19,4 +19,11 @@ public class EmployeeServiceImpl implements EmployeeService{
 		else
 			return bimpl.getEmployees(deptNo,EmpSortEnum.Joining);
 	}
+
+	@Override
+	public Employee getEmployee(int empId) {
+		// TODO Auto-generated method stub
+		return bimpl.getEmployee(empId);
+	}
+	
 }

@@ -28,11 +28,11 @@ public class ConnectionFactory {
 		return getInstance().createConnection();
 	}
 	private Connection createConnection() {
-		Properties credentialsProps = null;
+/*		Properties credentialsProps = null;
 		boolean error = true;
 		try {
 			credentialsProps = new Properties();
-			InputStream stream = ClassLoader.getSystemResourceAsStream("credentials.properties");
+			InputStream stream = ConnectionFactory.class.getResourceAsStream("credentials.properties");
 			if (stream == null) {
 				logger.error("Error in loading the credentials for JDBC, "
 						+ "credentials.properties file with jdbc credentials in the following foramt is required \n"
@@ -52,17 +52,17 @@ public class ConnectionFactory {
 		if (error) {
 			return null;
 		}
-
+*/
 		try {
 			logger.info("loading driver");
-			Class.forName(credentialsProps.getProperty("driver.name"));
+			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			logger.error(e.getMessage());
 		}
 
-		String url = credentialsProps.getProperty("url");
-		String user = credentialsProps.getProperty("user");
-		String password = credentialsProps.getProperty("pwd");
+		String url = "jdbc:mysql://localhost:3306/imcs1";
+		String user ="root";
+		String password = "root";
 
 		try {
 			connection = DriverManager.getConnection(url, user, password);

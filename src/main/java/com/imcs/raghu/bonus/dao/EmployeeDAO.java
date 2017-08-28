@@ -7,5 +7,7 @@ import com.imcs.raghu.bonus.pojo.Employee;
 
 public interface EmployeeDAO {
 	public List<Employee> getEmployees(int deptNo,EmpSortEnum sort);
+
+	public Employee getEmployee(int empId);
 	
 }

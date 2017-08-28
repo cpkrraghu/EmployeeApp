@@ -21,4 +21,7 @@ public class BonusServiceImpl implements BonusService{
 	public void updateBonus(int	deptNo, float rem){
 		bimpl.updateBonus(deptNo,rem);
 	}
+	public Bonus getBonus(int deptNo) {
+		 return bimpl.getBonus(deptNo);
+	}
 }

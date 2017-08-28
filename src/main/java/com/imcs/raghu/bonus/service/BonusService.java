@@ -8,4 +8,5 @@ public interface BonusService {
 	public void loadBonus(List<Bonus> bonus);
 	public List<Bonus> getBonus();
 	public void updateBonus(int	deptNo, float rem);
+	public Bonus getBonus(int deptNo);
 }

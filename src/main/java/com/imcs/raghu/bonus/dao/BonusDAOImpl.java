@@ -92,4 +92,22 @@ public class BonusDAOImpl extends AbstractDAO implements BonusDAO{
 			logger.error(e.getMessage());
 		}		
 	}
+	@Override
+	public Bonus getBonus(int deptNo) {
+		logger.info("getting dept bonus");
+		Bonus b=null;
+		try (Connection conn = ConnectionFactory.getConnection();
+				Statement st=conn.createStatement();
+				PreparedStatement ps = conn.prepareStatement("select deptNo,amount,remainingAmount from tbl_bonus where deptNo=?")) {
+			ps.setInt(1, deptNo);
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()){
+				b=new Bonus(rs.getInt(1), rs.getFloat(2), rs.getFloat(3));
+			}
+			logger.info("fetced bonus data");
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return b;
+	}
 }

@@ -9,4 +9,5 @@ public interface BonusDAO {
 	public void loadBonus(List<Bonus> bonus);
 	public List<Bonus> getAllBonus();
 	public void updateBonus(int deptNo,float amount);
+	public Bonus getBonus(int deptNo);
 }
