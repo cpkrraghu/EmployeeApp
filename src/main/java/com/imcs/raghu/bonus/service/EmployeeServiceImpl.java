@@ -11,19 +11,35 @@ import com.imcs.raghu.bonus.pojo.Employee;
 
 public class EmployeeServiceImpl implements EmployeeService{
 	final static Logger logger=Logger.getLogger(EmployeeServiceImpl.class);
-	private EmployeeDAO bimpl=new EmployeeDAOImpl();
+	private EmployeeDAO empDao=new EmployeeDAOImpl();
 	
 	public List<Employee> getEmployees(int deptNo){
 		if(deptNo%2==0)
-			return bimpl.getEmployees(deptNo,EmpSortEnum.Age);
+			return empDao.getEmployees(deptNo,EmpSortEnum.Age);
 		else
-			return bimpl.getEmployees(deptNo,EmpSortEnum.Joining);
+			return empDao.getEmployees(deptNo,EmpSortEnum.Joining);
 	}
 
 	@Override
 	public Employee getEmployee(int empId) {
+		return empDao.getEmployee(empId);
+	}
+
+	@Override
+	public boolean deleteEmployee(int empId) {
+		return empDao.deleteEmployee(empId);
+	}
+
+	@Override
+	public boolean updateEmployee(Employee emp) {
 		// TODO Auto-generated method stub
-		return bimpl.getEmployee(empId);
+		return empDao.updateEmployee(emp);
+	}
+
+	@Override
+	public boolean addEmployee(Employee emp) {
+		// TODO Auto-generated method stub
+		return empDao.addEmployee(emp);
 	}
 	
 }

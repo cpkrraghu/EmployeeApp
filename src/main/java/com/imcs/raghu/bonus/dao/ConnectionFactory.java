@@ -10,8 +10,6 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
-import com.imcs.raghu.bonus.dao.EmployeeDAOImpl;
-
 public class ConnectionFactory {
 	final static Logger logger=Logger.getLogger(ConnectionFactory.class);
 	private Connection connection;
@@ -28,11 +26,11 @@ public class ConnectionFactory {
 		return getInstance().createConnection();
 	}
 	private Connection createConnection() {
-/*		Properties credentialsProps = null;
+		Properties credentialsProps = null;
 		boolean error = true;
 		try {
 			credentialsProps = new Properties();
-			InputStream stream = ConnectionFactory.class.getResourceAsStream("credentials.properties");
+			InputStream stream = getClass().getClassLoader().getResourceAsStream("credentials.properties");
 			if (stream == null) {
 				logger.error("Error in loading the credentials for JDBC, "
 						+ "credentials.properties file with jdbc credentials in the following foramt is required \n"
@@ -52,17 +50,17 @@ public class ConnectionFactory {
 		if (error) {
 			return null;
 		}
-*/
+
 		try {
 			logger.info("loading driver");
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName(credentialsProps.getProperty("driver.name"));
 		} catch (ClassNotFoundException e) {
 			logger.error(e.getMessage());
 		}
 
-		String url = "jdbc:mysql://localhost:3306/imcs1";
-		String user ="root";
-		String password = "root";
+		String url = credentialsProps.getProperty("url");
+		String user =credentialsProps.getProperty("user");
+		String password = credentialsProps.getProperty("pwd");
 
 		try {
 			connection = DriverManager.getConnection(url, user, password);

@@ -9,5 +9,11 @@ public interface EmployeeDAO {
 	public List<Employee> getEmployees(int deptNo,EmpSortEnum sort);
 
 	public Employee getEmployee(int empId);
+
+	public boolean deleteEmployee(int empId);
+	
+	public boolean updateEmployee(Employee emp);
+	
+	public boolean addEmployee(Employee emp);
 	
 }

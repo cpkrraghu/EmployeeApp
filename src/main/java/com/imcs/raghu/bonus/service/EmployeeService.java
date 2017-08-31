@@ -7,4 +7,7 @@ import com.imcs.raghu.bonus.pojo.Employee;
 public interface EmployeeService {
 	public List<Employee> getEmployees(int deptNo);
 	public Employee getEmployee(int empId);
+	public boolean deleteEmployee(int empId);
+	public boolean updateEmployee(Employee emp);
+	public boolean addEmployee(Employee emp);
 }
