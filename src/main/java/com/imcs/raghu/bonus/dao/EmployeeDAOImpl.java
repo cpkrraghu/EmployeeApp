@@ -17,13 +17,13 @@ import com.imcs.raghu.bonus.pojo.Employee;
 public class EmployeeDAOImpl extends AbstractDAO implements EmployeeDAO{
 	final static Logger logger=Logger.getLogger(EmployeeDAOImpl.class);
 	
-	public List<Employee> getEmployees(int deptNo,EmpSortEnum sort) {
+	public List<Employee> getEmployees(int deptNo) {
 		logger.info("get employees by age for dept"+deptNo);
 		List<Employee> list=new ArrayList<>();
 		ResultSet rs=null;
 		try (Connection conn = ConnectionFactory.getConnection();
 				Statement st=conn.createStatement();
-				PreparedStatement ps = conn.prepareStatement("select empNo,deptNo,doj,dob,salary,salaryGrade from tbl_employee where deptNo=? order by "+sort.value)) {
+				PreparedStatement ps = conn.prepareStatement("select empNo,deptNo,doj,dob,salary,salaryGrade from tbl_employee where deptNo=?")) {
 				ps.setInt(1, deptNo);
 				rs=ps.executeQuery();
 				while(rs.next()){
@@ -89,22 +89,24 @@ public class EmployeeDAOImpl extends AbstractDAO implements EmployeeDAO{
 	}
 
 	@Override
-	public boolean addEmployee(Employee emp) {
+	public int addEmployee(Employee emp) {
 		int addCount=0;
+		int id=0;
 		try (Connection conn = ConnectionFactory.getConnection();
 				Statement st=conn.createStatement();
 				PreparedStatement ps = conn.prepareStatement("insert into tbl_employee values(?,?,?,?,?,?)")){
+				id=getNextEmpId();
 				ps.setInt(2, emp.getDeptNo());
 				ps.setDate(3, new Date(emp.getDoj().getTime()));
 				ps.setDate(4, new Date(emp.getDob().getTime()));
 				ps.setFloat(5, emp.getSalary());
 				ps.setInt(6, emp.getSalGrade());
-				ps.setInt(1, getNextEmpId());
+				ps.setInt(1, id);
 				addCount=ps.executeUpdate();
 		}catch (Exception ex) {
 			logger.error(ex.getMessage());
 		}
-		return addCount>0?true:false;
+		return addCount>0?id:0;
 	}
 
 	private int getNextEmpId() {

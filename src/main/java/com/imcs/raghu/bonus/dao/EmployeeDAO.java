@@ -6,7 +6,7 @@ import com.imcs.raghu.bonus.pojo.EmpSortEnum;
 import com.imcs.raghu.bonus.pojo.Employee;
 
 public interface EmployeeDAO {
-	public List<Employee> getEmployees(int deptNo,EmpSortEnum sort);
+	public List<Employee> getEmployees(int deptNo);
 
 	public Employee getEmployee(int empId);
 
@@ -14,6 +14,6 @@ public interface EmployeeDAO {
 	
 	public boolean updateEmployee(Employee emp);
 	
-	public boolean addEmployee(Employee emp);
+	public int addEmployee(Employee emp);
 	
 }

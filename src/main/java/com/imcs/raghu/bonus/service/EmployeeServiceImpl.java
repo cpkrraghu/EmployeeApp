@@ -14,10 +14,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 	private EmployeeDAO empDao=new EmployeeDAOImpl();
 	
 	public List<Employee> getEmployees(int deptNo){
-		if(deptNo%2==0)
-			return empDao.getEmployees(deptNo,EmpSortEnum.Age);
-		else
-			return empDao.getEmployees(deptNo,EmpSortEnum.Joining);
+		
+			return empDao.getEmployees(deptNo);
+		
 	}
 
 	@Override
@@ -37,7 +36,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	public boolean addEmployee(Employee emp) {
+	public int addEmployee(Employee emp) {
 		// TODO Auto-generated method stub
 		return empDao.addEmployee(emp);
 	}
