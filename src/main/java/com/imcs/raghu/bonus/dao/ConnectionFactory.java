@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 
 public class ConnectionFactory {
 	final static Logger logger=Logger.getLogger(ConnectionFactory.class);
+	//comment from 1170
 	private Connection connection;
 	private static ConnectionFactory cf ;
 	private ConnectionFactory(){
